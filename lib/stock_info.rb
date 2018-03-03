@@ -2,11 +2,10 @@ require 'yaml'
 require 'json'
 require 'net/http'
 require 'date'
-require 'pp' #TODO: remove?
 
-SETTINGS_FILE = './settings.yml'
 DAYS_PER_YEAR = 365
 DATE_FORMAT = "yyyy-mm-dd"
+SETTINGS_FILE = './settings.yml'
 
 class StockInfo
   API_DAY_DATA_STR_TO_SYM = {
@@ -81,6 +80,7 @@ class StockInfo
   end
 
   def calc_max_drawdown(data)
+    # TODO: check, test!
     max_drawdown = 0
     peak = data[0][:close]
     low = peak
@@ -110,20 +110,4 @@ class StockInfo
     data = calculate_data(stock_data)
     data
   end
-end
-
-# TODO: safely check settings file:
-# TODO: split requests to some maximum to avoid too big responses?
-
-
-stock, date = ARGV
-def check_args(stock, date)
-  # TODO implement
-  true
-end
-
-args_ok = check_args(stock, date)
-if args_ok
-  res = StockInfo.new().get_info(stock, date)
-  PP.pp res
 end
