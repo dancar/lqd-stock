@@ -1,0 +1,2 @@
+api_key: "dgLd6327mZtPDUkmUUsW"
+url_template: "https://www.quandl.com/api/v3/datasets/WIKI/%{stock}"
