@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <title>LQD-STOCK Update Page</title>
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <table id="stock-table-container">
+      <thead>
+      <tr>
+        <th class="table-cell">
+          #
+        </th>
+
+        <th class="table-cell">
+          Stock
+        </th>
+
+        <th class="table-cell">
+          Rate of Return
+        </th>
+
+        <th class="table-cell">
+          Max Drawdown
+        </th>
+
+        <th class="table-cell">
+          Timestamp
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @data.each_with_index do |item, index| %>
+
+      <tr class="table-row">
+        <td class="table-cell">
+          <%= index %>
+        </td>
+
+        <td class="table-cell">
+          <%= item[:stock] %>
+        </td>
+
+        <td class="table-cell">
+          <%= item[:return_rate] %>
+        </td>
+
+        <td class="table-cell">
+          <%= item[:max_drawdown] %>
+        </td>
+
+        <td class="table-cell">
+          <%= item[:timestamp] %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </body>
+</html>

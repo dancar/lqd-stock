@@ -4,3 +4,4 @@ source "https://rubygems.org"
 
 gem "mail"
 gem "oauth"
+gem "sinatra"

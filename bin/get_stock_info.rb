@@ -3,6 +3,7 @@ require './lib/stock_info'
 require './lib/publishers/console_publisher'
 require './lib/publishers/email_publisher'
 require './lib/publishers/twitter_publisher'
+require './lib/publishers/lqd_page_publisher'
 require './lib/settings'
 
 # TODO: safely check settings file:
@@ -12,6 +13,7 @@ PUBLISHERS = {
   console: ConsolePublisher,
   email: EmailPublisher,
   twitter: TwitterPublisher,
+  lqd_page: LqdPagePublisher,
 }
 
 stock, date = ARGV

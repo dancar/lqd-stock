@@ -20,3 +20,7 @@ publishers:
     to: 'your-address@gmail.com'
     from: 'lqd-stock@carmon.org.il'
     subject: 'Stock Update'
+
+  lqd_page:
+    enable: true
+    uri: http://localhost:4567/update
