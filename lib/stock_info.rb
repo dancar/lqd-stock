@@ -1,12 +1,9 @@
-require 'yaml'
 require 'json'
 require 'net/http'
 require 'date'
+require './lib/settings'
 
 DAYS_PER_YEAR = 365
-DATE_FORMAT = "yyyy-mm-dd"
-SETTINGS_FILE = './settings.yml'
-
 class StockInfo
   API_DAY_DATA_STR_TO_SYM = {
     "Date" => :date,
@@ -25,7 +22,7 @@ class StockInfo
   }
 
   def initialize()
-    settings = YAML.load_file(SETTINGS_FILE)
+    settings = Settings.new()
     @api_key = settings["api_key"]
     @url_template = settings["url_template"]
   end
@@ -108,6 +105,7 @@ class StockInfo
   def get_info(stock, date)
     stock_data = fetch_info(stock, date)
     data = calculate_data(stock_data)
+    data[:stock] = stock
     data
   end
 end

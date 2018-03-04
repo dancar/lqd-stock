@@ -1,2 +1,22 @@
-api_key: "dgLd6327mZtPDUkmUUsW"
+api_key: "???"
 url_template: "https://www.quandl.com/api/v3/datasets/WIKI/%{stock}"
+publishers:
+  console:
+    enable: true
+
+  twitter:
+    enable: true
+    api_key: '???'
+    api_secret: '???'
+    oauth_token_key: '???'
+    oauth_token_secret: '???'
+
+  email:
+    enable: true
+    address: "smtp.gmail.com"
+    port: 587
+    user_name: '???'
+    password: '???'
+    to: 'your-address@gmail.com'
+    from: 'lqd-stock@carmon.org.il'
+    subject: 'Stock Update'
