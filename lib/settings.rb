@@ -11,7 +11,6 @@ class Settings < Hash
     self.merge!(
       symbolize_keys(
         simple_deep_merge(base_settings, local_settings)))
-    pp self
   end
 
   def symbolize_keys(hash)

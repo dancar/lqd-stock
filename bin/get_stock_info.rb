@@ -7,7 +7,9 @@ require './lib/publishers/lqd_page_publisher'
 require './lib/settings'
 
 # TODO: safely check settings file:
+# TODO Tests
 # TODO: split requests to some maximum to avoid too big responses?
+# TODO another API?
 
 PUBLISHERS = {
   console: ConsolePublisher,

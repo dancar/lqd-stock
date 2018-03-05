@@ -1,11 +1,15 @@
 <html>
   <head>
     <title>LQD-STOCK Update Page</title>
+    <link rel="stylesheet" href="/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="index.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   </head>
   <body>
+    <h1>LqD Stock Info Page</h1>
+    <hr />
+    <input type="checkbox" name="autorefresh" id="autorefresh" onchange="toggleRefresh()" /> </input>
+    <label for="autorefresh">Auto-refresh</label>
     <table id="stock-table-container">
       <thead>
       <tr>
@@ -31,7 +35,7 @@
       </tr>
       </thead>
       <tbody>
-      <% @data.each_with_index do |item, index| %>
+      <% data.each_with_index do |item, index| %>
 
       <tr class="table-row">
         <td class="table-cell">
@@ -39,23 +43,44 @@
         </td>
 
         <td class="table-cell">
-          <%= item[:stock] %>
+          <%= item["stock"] %>
         </td>
 
         <td class="table-cell">
-          <%= item[:return_rate] %>
+          <%= item["return_rate"] %>
         </td>
 
         <td class="table-cell">
-          <%= item[:max_drawdown] %>
+          <%= item["max_drawdown"] %>
         </td>
 
         <td class="table-cell">
-          <%= item[:timestamp] %>
+          <%= item["timestamp"] %>
         </td>
       </tr>
       <% end %>
       </tbody>
     </table>
+    <script language="javascript">
+     const REFRESH_INTERVAL = 1000
+     const DISABLE_REFRESH_KEY = "disable-auto-refresh"
+     const refreshCheckbox = document.getElementById("autorefresh")
+
+     function refreshCheck () {
+       if (!window.sessionStorage.key(DISABLE_REFRESH_KEY)) {
+         window.location.reload(true)
+       }
+     }
+
+     function toggleRefresh() {
+       refreshCheckbox.checked
+          ? window.sessionStorage.clear(DISABLE_REFRESH_KEY)
+          : window.sessionStorage[DISABLE_REFRESH_KEY] = "disabled!"
+     }
+
+     refreshCheckbox.checked = !window.sessionStorage.key(DISABLE_REFRESH_KEY)
+     setInterval(refreshCheck, REFRESH_INTERVAL)
+
+    </script>
   </body>
 </html>
