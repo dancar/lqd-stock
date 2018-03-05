@@ -2,12 +2,13 @@ require 'yaml'
 
 SETTINGS_FILE = './settings.yml'
 LOCAL_SETTINGS_FILE = './settings_local.yml'
+# TODO: check files exists
 
 class Settings < Hash
-  def initialize()
+  def initialize(settings_file = SETTINGS_FILE, local_settings_file = LOCAL_SETTINGS_FILE)
     super()
-    base_settings = YAML.load_file(SETTINGS_FILE)
-    local_settings = YAML.load_file(LOCAL_SETTINGS_FILE)
+    base_settings = YAML.load_file(settings_file)
+    local_settings = YAML.load_file(local_settings_file)
     self.merge!(
       symbolize_keys(
         simple_deep_merge(base_settings, local_settings)))

@@ -1,5 +1,9 @@
+# Quandl API key:
 api_key: "???"
+# Quandl URL:
 url_template: "https://www.quandl.com/api/v3/datasets/WIKI/%{stock}"
+
+# Publisher settings:
 publishers:
   console:
     enable: true
@@ -13,14 +17,14 @@ publishers:
 
   email:
     enable: true
-    address: "smtp.gmail.com"
-    port: 587
-    user_name: '???'
-    password: '???'
-    to: 'your-address@gmail.com'
-    from: 'lqd-stock@carmon.org.il'
-    subject: 'Stock Update'
+    address: "???"                  # SMTP server url (i.e smtp.gmail.com
+    port: 587                       # SMTP Server port
+    user_name: '???'                # SMTP username
+    password: '???'                 # SMTP password
+    to: 'your-address@gmail.com'    # email address to send notification to
+    from: 'lqd-stock@carmon.org.il' # email address from which to send
+    subject: 'Stock Update'         # email subject
 
   lqd_page:
     enable: true
-    uri: http://localhost:4567/update
+    url: 'http://lqd-stock.ma-kaf.com:80/update' # URL for Lqd-Page server

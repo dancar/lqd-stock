@@ -8,7 +8,7 @@ class LqdPagePublisher
   end
 
   def publish(info)
-    uri = URI.parse(@settings[:uri])
+    uri = URI.parse(@settings[:url])
     http = Net::HTTP.new(uri.host, uri.port)
     header = {'Content-Type': 'text/json'}
     request = Net::HTTP::Post.new(uri.request_uri, header)

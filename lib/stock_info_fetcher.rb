@@ -4,7 +4,7 @@ require 'date'
 require './lib/settings'
 
 DAYS_PER_YEAR = 365
-class StockInfo
+class StockInfoFetcher
   API_DAY_DATA_STR_TO_SYM = {
     "Date" => :date,
     "Open" => :open,

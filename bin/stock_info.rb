@@ -1,5 +1,5 @@
 require 'pp' #TODO: remove?
-require './lib/stock_info'
+require './lib/stock_info_fetcher'
 require './lib/publishers/console_publisher'
 require './lib/publishers/email_publisher'
 require './lib/publishers/twitter_publisher'
@@ -7,6 +7,7 @@ require './lib/publishers/lqd_page_publisher'
 require './lib/settings'
 
 # TODO: safely check settings file:
+# TODO specify date ranger, everywhere
 # TODO Tests
 # TODO: split requests to some maximum to avoid too big responses?
 # TODO another API?
@@ -36,6 +37,6 @@ end
 
 args_ok = check_args(stock, date)
 if args_ok
-  info = StockInfo.new().get_info(stock, date)
+  info = StockInfoFetcher.new().get_info(stock, date)
   publish(info)
 end

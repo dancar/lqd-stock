@@ -8,10 +8,6 @@ set :public_folder, 'public'
 
 data = File.file?(DATA_FILE) ? JSON.parse(File.read(DATA_FILE)) : []
 
-def save_data(data)
-  File.write(DATA_FILE, JSON.dump(data))
-end
-
 get '/' do
   erb :"index.html", locals: {data: data}
 end
@@ -26,4 +22,11 @@ post '/update' do
   data.prepend(item)
   data.pop() if data.length > MAX_ITEMS
   save_data(data)
+  status 201
+end
+
+private
+
+def save_data(data)
+  File.write(DATA_FILE, JSON.dump(data))
 end
