@@ -4,7 +4,7 @@ require 'json'
 
 class LqdPagePublisher
   def initialize
-    @settings = Settings.new()[:publishers][:lqd_page]
+    @settings = Settings[:publishers][:lqd_page]
   end
 
   def publish(info)

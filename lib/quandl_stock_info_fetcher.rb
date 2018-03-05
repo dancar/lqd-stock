@@ -4,7 +4,7 @@ require 'date'
 require './lib/settings'
 
 DAYS_PER_YEAR = 365
-class StockInfoFetcher
+class QuandlStockInfoFetcher
   API_DAY_DATA_STR_TO_SYM = {
     "Date" => :date,
     "Open" => :open,
@@ -22,7 +22,7 @@ class StockInfoFetcher
   }
 
   def initialize()
-    settings = Settings.new()
+    settings = Settings[:quandl]
     @api_key = settings["api_key"]
     @url_template = settings["url_template"]
   end

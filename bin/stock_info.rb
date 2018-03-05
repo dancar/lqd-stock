@@ -1,5 +1,5 @@
 require 'pp' #TODO: remove?
-require './lib/stock_info_fetcher'
+require './lib/quandl_stock_info_fetcher'
 require './lib/publishers/console_publisher'
 require './lib/publishers/email_publisher'
 require './lib/publishers/twitter_publisher'
@@ -26,7 +26,7 @@ def check_args(stock, date)
 end
 
 def publish(info)
-  publisher_settings = Settings.new()[:publishers]
+  publisher_settings = Settings[:publishers]
   PUBLISHERS.each do | settings_key, klass|
     if publisher_settings[settings_key][:enable]
       publisher = klass.new
@@ -37,6 +37,6 @@ end
 
 args_ok = check_args(stock, date)
 if args_ok
-  info = StockInfoFetcher.new().get_info(stock, date)
+  info = QuandlStockInfoFetcher.new().get_info(stock, date)
   publish(info)
 end

@@ -12,7 +12,7 @@ class EmailPublisher
   TEMPLATE
 
   def initialize
-    @settings = Settings.new()[:publishers][:email]
+    @settings = Settings[:publishers][:email]
   end
 
   def publish(info)

@@ -1,22 +1,21 @@
-# Quandl API key:
-api_key: "???"
-# Quandl URL:
-url_template: "https://www.quandl.com/api/v3/datasets/WIKI/%{stock}"
+quandl:
+  api_key: "???"
+  url_template: "https://www.quandl.com/api/v3/datasets/WIKI/%{stock}"
 
 # Publisher settings:
 publishers:
   console:
-    enable: true
+    enable: false
 
   twitter:
-    enable: true
+    enable: false
     api_key: '???'
     api_secret: '???'
     oauth_token_key: '???'
     oauth_token_secret: '???'
 
   email:
-    enable: true
+    enable: false
     address: "???"                  # SMTP server url (i.e smtp.gmail.com
     port: 587                       # SMTP Server port
     user_name: '???'                # SMTP username

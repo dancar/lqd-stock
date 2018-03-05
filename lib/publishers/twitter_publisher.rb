@@ -9,7 +9,7 @@ class TwitterPublisher
   TEMPLATE
 
   def initialize
-    @settings = Settings.new()[:publishers][:twitter]
+    @settings = Settings[:publishers][:twitter]
   end
 
   def publish(info)
