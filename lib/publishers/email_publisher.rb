@@ -34,7 +34,6 @@ class EmailPublisher
       delivery_method :smtp, options
     end
 
-    # TODO handle errors?
     mail_from = @settings[:from]
     mail_to = @settings[:to]
     begin

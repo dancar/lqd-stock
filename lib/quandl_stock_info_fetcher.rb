@@ -28,11 +28,6 @@ class QuandlStockInfoFetcher
     @settings = Settings[:quandl]
   end
 
-  # TODO REMOVE
-  def development_data()
-    JSON.parse(File.read('./data.json')).map {|day| Hash[day.map {|str, val| [API_DAY_DATA_STR_TO_SYM[str], val]}]}
-  end
-
   def fetch_info(stock, date)
     api_key = @settings[:api_key]
     uri = URI(@url_template % {stock: stock})
@@ -47,9 +42,6 @@ class QuandlStockInfoFetcher
     File.write('response_%s.json' % Time.now.to_f.to_s, response_body) if @settings[:dump_response]
     response_parsed = JSON.parse(response_body)
     data = response_parsed["dataset"]
-
-    # TODO: handle errors? including empty data
-
     column_names = data["column_names"].map {|str| API_DAY_DATA_STR_TO_SYM[str] }
     stock_data = data["data"].map{ |day| Hash[column_names.zip(day)]}
     stock_data
@@ -66,7 +58,7 @@ class QuandlStockInfoFetcher
     last_date = Date.parse(last_day[:date])
 
     ret = (final_value.to_f - initial_value) / initial_value
-    # TODO: calc dividens?
+    # TODO: calc dividends?
 
     max_drawdown = find_mmd(data)
 
