@@ -30,7 +30,7 @@ The project supports the following methods for **publishing** the information:
 1. install gems: `cd lqd-stock && bundle`
 1. Provide configuration file `settings.yml`
   -  To this end, a self-explanatory **example** configuration file settings `settings.yml.example` is provided.
-  -  Note that in for the different publishing methods to work, all settings must be valid and enabled.
+  -  Note that for the different publishing methods to work, all the relevant settings must be provided and valid.
   -  A Quandl API key must be provided as well.
 
 ## Usage
