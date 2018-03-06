@@ -1,7 +1,5 @@
 require 'yaml'
 
-# TODO: check files exists
-
 class Settings
   SETTINGS_FILE = './settings.yml'
   def self.[](k)

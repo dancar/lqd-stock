@@ -8,8 +8,12 @@ class TwitterPublisher
   end
 
   def publish(info)
-    tweet(info.to_s)
-    puts "Tweet published in: http://twitter.com/%s" % @settings[:handle]
+    status = tweet(info.to_s)
+    if status == :success
+      puts "Tweet published in: http://twitter.com/%s" % @settings[:handle]
+    else
+      puts("Error twitting using account: %s " % @settings[:handle])
+    end
   end
 
   def tweet(tweet)
@@ -26,7 +30,8 @@ class TwitterPublisher
       oauth_token_secret: @settings[:oauth_token_secret],
     }
     access_token = OAuth::AccessToken.from_hash(consumer, token_hash )
-    access_token.request(:post, STATUS_UPDATE_ENDPOINT, {status: tweet})
-    # TODO: handle errors?
+    response = access_token.request(:post, STATUS_UPDATE_ENDPOINT, {status: tweet})
+
+    response.kind_of?(Net::HTTPSuccess) ? :success : :error
   end
 end
