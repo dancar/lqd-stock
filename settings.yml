@@ -5,7 +5,7 @@ quandl:
 # Publisher settings:
 publishers:
   console:
-    enable: false
+    enable: true
 
   twitter:
     enable: false

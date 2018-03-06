@@ -4,3 +4,7 @@ some_hash:
   some_inner_hash:
     some_overriden_value: "I am settings"
     some_value: "I am settings, too"
+
+quandl:
+  api_key: "my_great_key"
+  url_template: "http://not-quandl.com/%{stock}"

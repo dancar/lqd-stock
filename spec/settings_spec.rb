@@ -1,8 +1,7 @@
 require './lib/settings'
+require './spec/spec_helper'
 describe Settings do
-  before { Settings.init("./spec/test_settings.yml", "./spec/test_settings_local.yml")}
 
-  it { should be_kind_of(Hash) }
   it "should correctly load a settings file" do
     expect(Settings[:some_true_value]).to be true
     expect(Settings[:some_string]).to eq "stringy!"

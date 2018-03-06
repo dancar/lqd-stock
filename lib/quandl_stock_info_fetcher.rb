@@ -22,9 +22,7 @@ class QuandlStockInfoFetcher
   }
 
   def initialize()
-    settings = Settings[:quandl]
-    @api_key = settings["api_key"]
-    @url_template = settings["url_template"]
+    @settings = Settings[:quandl]
   end
 
   # TODO REMOVE
@@ -33,16 +31,19 @@ class QuandlStockInfoFetcher
   end
 
   def fetch_info(stock, date)
-    return development_data() # TODO: remove
-
-    uri = URI(@url_template % {stock: stock})
+    api_key = @settings[:api_key]
+    url_template = @settings[:url_template]
+    uri = URI(url_template % {stock: stock})
     params = {
-      start_date: date
+      api_key: api_key,
+      start_date: date,
     }
     uri.query = URI.encode_www_form(params)
     response = Net::HTTP.get_response(uri)
-    data = JSON.parse(response.body)["dataset"] #["data"]
+    data = JSON.parse(response.body)["dataset"]
+
     # TODO: handle errors? including empty data
+
     column_names = data["column_names"].map {|str| API_DAY_DATA_STR_TO_SYM[str] }
     stock_data = data["data"].map{ |day| Hash[column_names.zip(day)]}
     stock_data
@@ -60,9 +61,9 @@ class QuandlStockInfoFetcher
 
     duration_days = last_date.mjd - first_date.mjd
     ret = (final_value - initial_value) / initial_value
-    annual_return_rate = ret / (duration_days / DAYS_PER_YEAR)
+    annual_return_rate = ret / (1.0 * duration_days / DAYS_PER_YEAR)
 
-    max_drawdown = calc_max_drawdown(data)
+    max_drawdown = find_mmd (data)
 
     {
       max_drawdown: max_drawdown,
@@ -76,36 +77,29 @@ class QuandlStockInfoFetcher
     }
   end
 
-  def calc_max_drawdown(data)
+  def  find_mmd(data)
     # TODO: check, test!
+    peak =  data[-1][:close]
     max_drawdown = 0
-    peak = data[0][:close]
-    low = peak
-    previous_day_value = peak
-    data.each_with_index do |day, index|
 
-      next if index == 0
-
+    data.reverse_each do |day|
+      next if day == data[-1]
       value = day[:close]
-      if previous_day_value > value
-        # Value decreased
-        low = value
-        drawdown = (peak - low) / peak
-        max_drawdown = [max_drawdown, drawdown].max
-      else
-        # Value increased
+      if value > peak
         peak = value
-        low = value
+      else
+        drawdown = (peak.to_f - value ) / peak
+        max_drawdown = [max_drawdown, drawdown].max
       end
-      previous_day_value = value
     end
     max_drawdown
   end
 
   def get_info(stock, date)
     stock_data = fetch_info(stock, date)
+    return :no_data, [] if stock_data.length == 0
     data = calculate_data(stock_data)
     data[:stock] = stock
-    data
+    return :success, data
   end
 end

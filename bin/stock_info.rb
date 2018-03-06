@@ -37,6 +37,10 @@ end
 
 args_ok = check_args(stock, date)
 if args_ok
-  info = QuandlStockInfoFetcher.new().get_info(stock, date)
+  status, info = QuandlStockInfoFetcher.new().get_info(stock, date)
+  if status != :success
+    puts "Error loading data (#{status.to_s})"
+    exit(1)
+  end
   publish(info)
 end
