@@ -15,7 +15,7 @@ end
 post '/update' do
   request.body.rewind
   item_data = JSON.parse(request.body.read)
-  allowed_fields = ["stock", "return_rate", "max_drawdown"]
+  allowed_fields = ["stock", "return_value", "max_drawdown", "first_date", "last_date"]
   item = Hash[allowed_fields.map {|k| [k, item_data[k]]}]
   item["timestamp"] = Time.now.strftime("%d/%m/%Y %H:%M:%S")
   # TODO: check request

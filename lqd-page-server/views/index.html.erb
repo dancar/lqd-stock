@@ -22,7 +22,15 @@
         </th>
 
         <th class="table-cell">
-          Rate of Return
+          First Date
+        </th>
+
+        <th class="table-cell">
+          Last Date
+        </th>
+
+        <th class="table-cell">
+          Return
         </th>
 
         <th class="table-cell">
@@ -47,11 +55,19 @@
         </td>
 
         <td class="table-cell">
-          <%= item["return_rate"] %>
+          <%= item["first_date"] %>
         </td>
 
         <td class="table-cell">
-          <%= item["max_drawdown"] %>
+          <%= item["last_date"] %>
+        </td>
+
+        <td class="table-cell highlighted">
+          <%= "%0.2f%%" % (item["return_value"] * 100) %>
+        </td>
+
+        <td class="table-cell highlighted">
+          <%= "%0.2f%%" % (item["max_drawdown"] * 100) %>
         </td>
 
         <td class="table-cell">

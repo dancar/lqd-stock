@@ -26,8 +26,14 @@ hr {
 
 .table-cell {
   margin: 10px;
+  text-align: center;
   padding: 10px;
   display: table-cell;
+}
+
+.highlighted {
+  color: yellow;
+  background: rgba(255, 255, 255, 0.1);
 }
 .table-row {
   margin: 10px;

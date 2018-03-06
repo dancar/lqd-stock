@@ -9,6 +9,7 @@ publishers:
 
   twitter:
     enable: true
+    handle: '???'
     api_key: '???'
     api_secret: '???'
     oauth_token_key: '???'
@@ -26,4 +27,4 @@ publishers:
 
   lqd_page:
     enable: true
-    url: 'http://lqd-stock.ma-kaf.com:80/update' # URL for Lqd-Page server
+    url: 'http://lqd-stock.ma-kaf.com:80' # URL for Lqd-Page server
