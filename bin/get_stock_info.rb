@@ -6,11 +6,11 @@ require './lib/publishers/twitter_publisher'
 require './lib/publishers/lqd_page_publisher'
 require './lib/settings'
 
-# TODO: safely check settings file:
 # TODO specify date ranger, everywhere
 # TODO Tests
 # TODO: split requests to some maximum to avoid too big responses?
 # TODO another API?
+# TODO display publishing information (twitter account, mail, website)
 
 PUBLISHERS = {
   console: ConsolePublisher,

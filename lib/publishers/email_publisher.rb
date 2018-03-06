@@ -4,9 +4,7 @@ require './lib/settings'
 class EmailPublisher
   EMAIL_SUBJECT = 'Stock Update: %{stock}'
   EMAIL_TEMPLATE = <<~TEMPLATE
-    Stock Update: %{stock}
-    Rate of Return: %{return_rate}
-    Max Drawdown: %{max_drawdown}
+    %s
     ---------------------------------
     Cheers!
   TEMPLATE

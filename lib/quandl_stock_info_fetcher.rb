@@ -2,10 +2,10 @@ require 'json'
 require 'net/http'
 require 'date'
 require './lib/settings'
+require './lib/stock_info'
 
 
 class QuandlStockInfoFetcher
-  DAYS_PER_YEAR = 365
   API_URL_TEMPLATE =  "https://www.quandl.com/api/v3/datasets/WIKI/%{stock}"
   API_DAY_DATA_STR_TO_SYM = {
     "Date" => :date,
@@ -41,8 +41,11 @@ class QuandlStockInfoFetcher
       start_date: date,
     }
     uri.query = URI.encode_www_form(params)
-    response = Net::HTTP.get_response(uri)
-    data = JSON.parse(response.body)["dataset"]
+    response_body = Net::HTTP.get_response(uri).body
+    # response_body = File.read('./response_1520334471.32072.json') # TODO Remove
+    File.write('response_%s.json' % Time.now.to_f.to_s, response_body) if @settings[:dump_response]
+    response_parsed = JSON.parse(response_body)
+    data = response_parsed["dataset"]
 
     # TODO: handle errors? including empty data
 
@@ -61,26 +64,22 @@ class QuandlStockInfoFetcher
     first_date = Date.parse(first_day[:date])
     last_date = Date.parse(last_day[:date])
 
-    duration_days = last_date.mjd - first_date.mjd
-    ret = (final_value - initial_value) / initial_value
-    annual_return_rate = ret / (1.0 * duration_days / DAYS_PER_YEAR)
+    ret = (final_value.to_f - initial_value) / initial_value
+    # TODO: calc dividens?
 
-    max_drawdown = find_mmd (data)
+    max_drawdown = find_mmd(data)
 
-    {
+    StockInfo.new({
       max_drawdown: max_drawdown,
       first_date: first_date,
       last_date: last_date,
       initial_value: initial_value,
       final_value: final_value,
       return_value: ret,
-      return_rate: annual_return_rate,
-      duration_days: duration_days,
-    }
+    })
   end
 
   def  find_mmd(data)
-    # TODO: check, test!
     peak =  data[-1][:close]
     max_drawdown = 0
 

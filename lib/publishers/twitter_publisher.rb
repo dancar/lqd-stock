@@ -2,18 +2,13 @@ require 'oauth'
 
 class TwitterPublisher
   STATUS_UPDATE_ENDPOINT = "https://api.twitter.com/1.1/statuses/update.json"
-  TWEET_TEMPLATE = <<~TEMPLATE
-    Stock Update: %{stock}
-    Rate of Return: %{return_rate}
-    Max Drawdown: %{max_drawdown}
-  TEMPLATE
 
   def initialize
     @settings = Settings[:publishers][:twitter]
   end
 
   def publish(info)
-    tweet(TWEET_TEMPLATE % info)
+    tweet(info.to_s)
   end
 
   def tweet(tweet)
