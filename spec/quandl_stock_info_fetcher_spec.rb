@@ -1,6 +1,7 @@
 require './spec/spec_helper'
 require './lib/quandl_stock_info_fetcher'
 describe QuandlStockInfoFetcher do
+  TEST_URL_TEMPLATE = "http://not-quandl.com/%{stock}"
   sample_body = File.read('./spec/fixtures/body1.json')
   sample_body2 = File.read('./spec/fixtures/body2.json')
   sample_body3 = File.read('./spec/fixtures/body3.json')
@@ -14,7 +15,7 @@ describe QuandlStockInfoFetcher do
       to_return(status: 200, body: sample_body3, headers: {})
     stub_request(:get, "http://not-quandl.com/test_data4?api_key=my_great_key&start_date=2015-02-02").
       to_return(status: 200, body: sample_body4, headers: {})
-    @fetcher = QuandlStockInfoFetcher.new()
+    @fetcher = QuandlStockInfoFetcher.new(TEST_URL_TEMPLATE)
   end
 
   it "fetch with no errors" do

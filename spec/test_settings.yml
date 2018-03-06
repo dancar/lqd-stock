@@ -2,9 +2,7 @@ some_true_value: true
 some_string: "stringy!"
 some_hash:
   some_inner_hash:
-    some_overriden_value: "I am settings"
-    some_value: "I am settings, too"
+    some_value: "nested!"
 
 quandl:
   api_key: "my_great_key"
-  url_template: "http://not-quandl.com/%{stock}"

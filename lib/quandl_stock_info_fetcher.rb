@@ -4,7 +4,9 @@ require 'date'
 require './lib/settings'
 
 DAYS_PER_YEAR = 365
+
 class QuandlStockInfoFetcher
+  API_URL_TEMPLATE =  "https://www.quandl.com/api/v3/datasets/WIKI/%{stock}"
   API_DAY_DATA_STR_TO_SYM = {
     "Date" => :date,
     "Open" => :open,
@@ -21,7 +23,8 @@ class QuandlStockInfoFetcher
     "Adj. Volume" => :adj_volume,
   }
 
-  def initialize()
+  def initialize(url_template = API_URL_TEMPLATE)
+    @url_template = url_template
     @settings = Settings[:quandl]
   end
 
@@ -32,8 +35,7 @@ class QuandlStockInfoFetcher
 
   def fetch_info(stock, date)
     api_key = @settings[:api_key]
-    url_template = @settings[:url_template]
-    uri = URI(url_template % {stock: stock})
+    uri = URI(@url_template % {stock: stock})
     params = {
       api_key: api_key,
       start_date: date,

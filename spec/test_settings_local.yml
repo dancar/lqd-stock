@@ -1,3 +1,0 @@
-some_hash:
-  some_inner_hash:
-    some_overriden_value: "I am LOCAL settings"

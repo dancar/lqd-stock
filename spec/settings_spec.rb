@@ -7,8 +7,8 @@ describe Settings do
     expect(Settings[:some_string]).to eq "stringy!"
   end
 
-  it "should correctly override nested settings with local_settings" do
-    expect(Settings[:some_hash][:some_inner_hash][:some_value]).to eq("I am settings, too")
-    expect(Settings[:some_hash][:some_inner_hash][:some_overriden_value]).to eq("I am LOCAL settings")
+  it "should correctly symbolize nested settings" do
+    expect(Settings[:some_hash][:some_inner_hash][:some_value]).to eq "nested!"
   end
+
 end
