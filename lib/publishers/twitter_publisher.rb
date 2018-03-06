@@ -9,6 +9,7 @@ class TwitterPublisher
 
   def publish(info)
     tweet(info.to_s)
+    puts "Tweet published in: http://twitter.com/%s" % @settings[:handle]
   end
 
   def tweet(tweet)

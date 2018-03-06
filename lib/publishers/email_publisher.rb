@@ -17,6 +17,7 @@ class EmailPublisher
     subject = EMAIL_SUBJECT % info
     body = EMAIL_TEMPLATE % info
     self.send_email(subject, body)
+    puts "Email sent to: %s" % @settings[:to]
   end
 
   def send_email(mail_subject, mail_body)
