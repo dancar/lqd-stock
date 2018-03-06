@@ -38,7 +38,9 @@ The project supports the following methods for **publishing** the information:
 Usage:
 `$ ruby bin/get_stock_info.rb [STOCK] [DATE]`
 
-Date Format: `yyyy-mm-dd`
+DATE Format: `yyyy-mm-dd`
+
+STOCK Format: 1-4 Alphanumeric characters
 
 Example:
 

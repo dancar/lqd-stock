@@ -41,8 +41,9 @@ class QuandlStockInfoFetcher
       start_date: date,
     }
     uri.query = URI.encode_www_form(params)
-    response_body = Net::HTTP.get_response(uri).body
-    # response_body = File.read('./response_1520334471.32072.json') # TODO Remove
+    response = Net::HTTP.get_response(uri)
+    response_body = response.body
+    raise "Invalid response received from Quandl:\n%s" % response.body if !response.kind_of? Net::HTTPSuccess
     File.write('response_%s.json' % Time.now.to_f.to_s, response_body) if @settings[:dump_response]
     response_parsed = JSON.parse(response_body)
     data = response_parsed["dataset"]
