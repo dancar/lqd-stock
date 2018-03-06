@@ -35,6 +35,11 @@ def publish(info)
   end
 end
 
+if !File.file?(Settings::SETTINGS_FILE)
+  puts "No Settings file found in '#{Settings::SETTINGS_FILE}' !\nPlease see README and settings.yml.example for more information."
+  exit(1)
+end
+
 args_ok = check_args(stock, date)
 if args_ok
   status, info = QuandlStockInfoFetcher.new().get_info(stock, date)

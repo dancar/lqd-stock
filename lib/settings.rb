@@ -1,10 +1,9 @@
 require 'yaml'
 
-SETTINGS_FILE = './settings.yml'
 # TODO: check files exists
 
 class Settings
-
+  SETTINGS_FILE = './settings.yml'
   def self.[](k)
     init unless @settings
     @settings[k]

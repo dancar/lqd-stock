@@ -3,9 +3,9 @@ require 'net/http'
 require 'date'
 require './lib/settings'
 
-DAYS_PER_YEAR = 365
 
 class QuandlStockInfoFetcher
+  DAYS_PER_YEAR = 365
   API_URL_TEMPLATE =  "https://www.quandl.com/api/v3/datasets/WIKI/%{stock}"
   API_DAY_DATA_STR_TO_SYM = {
     "Date" => :date,
